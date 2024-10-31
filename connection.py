@@ -1,6 +1,9 @@
 import pymongo
+from dotenv import load_dotenv
+import os
+load_dotenv()
+db_url = os.getenv("DATABASE_URL")
 
 def get_mongo_client():
-    conn_str = "mongodb://localhost:27017"
-    client = pymongo.MongoClient(conn_str)
+    client = pymongo.MongoClient(db_url)
     return client

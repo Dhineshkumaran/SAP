@@ -9,11 +9,13 @@ import easyocr
 import pymongo
 import pandas as pd
 from bson import ObjectId
+from dotenv import load_dotenv
+
+load_dotenv()
+db_url = os.getenv("DATABASE_URL")
+secret_key = os.getenv("SECRET_KEY")
 
 app = Flask(__name__)
-
-# Set a secret key for encrypting session data
-app.secret_key = 'my_secret_key'
 
 # Specify the directory where uploaded files should be saved
 UPLOAD_FOLDER = 'static'
@@ -29,7 +31,7 @@ if not os.path.exists(UPLOAD_FOLDER):
 # Initialize EasyOCR reader
 reader = easyocr.Reader(['en'])
 
-app.config['SECRET_KEY'] = '7d568e58449f44679fec7690ccbcdd3d'
+app.config['SECRET_KEY'] = secret_key
 
 def display_points(text):
     try:
